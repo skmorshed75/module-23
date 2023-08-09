@@ -27,3 +27,33 @@
     </div>
 @endsection
 
+
+<form action="{{ route('incomes.index') }}" method="GET">
+    <div class="form-group">
+        <label for="category">Category:</label>
+        <input type="text" name="category" id="category" class="form-control" value="{{ request('category') }}">
+    </div>
+    <div class="form-group">
+        <label for="start_date">Start Date:</label>
+        <input type="date" name="start_date" id="start_date" class="form-control" value="{{ request('start_date') }}">
+    </div>
+    <div class="form-group">
+        <label for="end_date">End Date:</label>
+        <input type="date" name="end_date" id="end_date" class="form-control" value="{{ request('end_date') }}">
+    </div>
+    <button type="submit" class="btn btn-primary">Apply Filters</button>
+</form>
+
+
+@foreach ($incomes as $income)
+    <tr>
+        <!-- ... other columns -->
+        <td>
+            <form action="{{ route('incomes.destroy', $income) }}" method="POST">
+                @csrf
+                @method('DELETE')
+                <button type="submit" class="btn btn-danger">Delete</button>
+            </form>
+        </td>
+    </tr>
+@endforeach

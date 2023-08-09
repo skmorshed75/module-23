@@ -1,0 +1,94 @@
+/* public/css/custom.css */
+
+/* Body and container styling */
+body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+}
+
+.container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 20px;
+}
+
+/* Header and navigation */
+header {
+    background-color: #333;
+    color: white;
+    padding: 10px 0;
+    text-align: center;
+}
+
+nav {
+    background-color: #555;
+    padding: 10px 0;
+    text-align: center;
+}
+
+/* Form styling */
+form {
+    margin: 20px 0;
+}
+
+.form-group {
+    margin-bottom: 10px;
+}
+
+/* Table styling */
+table {
+    width: 100%;
+    border-collapse: collapse;
+}
+
+th, td {
+    padding: 10px;
+    text-align: left;
+    border-bottom: 1px solid #ddd;
+}
+
+/* Buttons */
+.btn {
+    display: inline-block;
+    padding: 8px 16px;
+    background-color: #333;
+    color: white;
+    border: none;
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+
+.btn:hover {
+    background-color: #555;
+}
+
+
+
+
+/* Responsive layout adjustments */
+@media screen and (max-width: 768px) {
+    /* Adjustments for small screens */
+    .container {
+        padding: 10px;
+    }
+    header, nav {
+        padding: 5px 0;
+    }
+    th, td {
+        padding: 5px;
+    }
+}
+
+@media screen and (max-width: 480px) {
+    /* Adjustments for extra small screens */
+    .container {
+        padding: 5px;
+    }
+    header, nav {
+        padding: 2px 0;
+    }
+    th, td {
+        padding: 2px;
+    }
+}

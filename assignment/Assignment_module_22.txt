@@ -2,154 +2,19 @@ Assignment:
 Module : 23
 Submitted by : Sheikh Mohammed Morshed
 Submission date : 09/08/2023
-------------------------------------------------------------------------------------------------
+-------------------------------------------------------------------------------------------------------------------------------------
 
 Assignment:  Creating an Income Expense Tracker
 ------------------------------------------------
 
 You are tasked with developing an Income Expense Tracker web application using Laravel to help users manage their finances effectively. The application will allow users to track their income and expenses, view financial summaries, and perform basic financial calculations. The assignment involves implementing various Laravel concepts, including database migrations, Eloquent ORM, form validation, and data manipulation.
- 
-
-Requirements:
-----------------
-
-Database Setup:
-
-Create a new database and configure the database connection in the .env file.
-
-Design and implement the necessary database tables for the application. You need at least two tables, one for income records and one for expense records. Include relevant fields such as amount, description, date, and category.
- 
-
-Models and Relationships:
-
-Create two models: Income and Expense, representing the income and expense records, respectively.
-
-Define the relationships between the Income and Expense models and the user model. Each income and expense record should belong to a specific user.
-
-
-User Authentication:
-
-Implement user registration and login functionalities using Laravel's built-in authentication system.
-
-Restrict access to the income and expense tracking features to authenticated users only.
-
- 
-
-Income and Expense Creation:
-
-Provide a form for users to add new income and expense records.
-
-Implement server-side validation to ensure the amount, description, and date fields are required and correctly formatted.
-
- 
-
-Displaying Records:
-
-Create separate views to display the list of income and expense records for the logged-in user.
-
-Implement pagination to display a limited number of records per page.
-
- 
-
-Financial Calculations:
-
-Calculate and display the total income and total expenses for the user.
-
-Calculate and display the net income (income - expenses) for the user.
-
- 
-
-Filtering and Sorting:
-
-Allow users to filter income and expense records based on categories or date ranges.
-
-Provide options for sorting records by date or amount in ascending or descending order.
-
- 
-
-Data Manipulation:
-
-Implement the ability to edit and delete income and expense records.
-
- 
-
-Styling and User Experience:
-
-Apply CSS styling to ensure a user-friendly and visually appealing interface.
-
-Make the application responsive to different screen sizes.
-
-
-
-
-Submission Instruction :
-
-Please submit your github repository link.
-
+==================================================================================================================================== 
 
 Solution :
 ---------------
 
-Step 1: Setting Up Laravel Project
-- Install Laravel: Use Composer to create a new Laravel project.
--- composer create-project --prefer-dist laravel/laravel IncomeExpenseTracker
-
-- Configure Database: Set up your database connection details in the .env file.
-
-Step 2: Database Setup
-- Create Migrations: Generate migration files for incomes and expenses tables.
--- php artisan make:migration create_incomes_table
--- php artisan make:migration create_expenses_table
-
-- Edit Migration Files: Define the columns for each table (e.g., amount, description, date, category, user_id, etc.).
-- Run Migrations: Apply migrations to create database tables.
--- php artisan migrate
-
-Step 3: Models and Relationships
-- Create Models: Generate models for Income and Expense.
--- php artisan make:model Income
--- php artisan make:model Expense
-
-- Define Relationships: In the User, Income, and Expense models, define the relationships using Eloquent relationships like belongsTo and hasMany.
-
-Step 4: User Authentication
-- Implement Authentication: Set up user registration and login using Laravel's built-in authentication scaffolding.
--- php artisan make:auth
-
-- Protect Routes: Use middleware to restrict access to income and expense functionalities to authenticated users.
-
-Step 5: Income and Expense Creation
-- Create Forms: Create forms in Blade templates for users to add new income and expense records.
-- Server-Side Validation: Implement server-side validation using Laravel's validation rules to validate form inputs
-
-Step 6: Displaying Records
-- List Records: Create views to display lists of income and expense records for the logged-in user.
-- Pagination: Implement pagination to limit the number of records per page.
-
-Step 7: Financial Calculations
-- Dashboard Summary: Create a dashboard or summary page that displays total income, total expenses, and net income for the user.
-- Calculate Totals: Use Eloquent queries to calculate the required financial summaries.
-
-Step 8: Filtering and Sorting
-- Filtering: Implement filter options for users to select categories or date ranges for filtering records.
-- Sorting: Provide options for sorting records by date or amount in ascending or descending order.
-
-Step 9: Data Manipulation
-- Edit and Delete: Implement edit and delete functionality for income and expense records, ensuring that only the owner can modify their records.
-
-Step 10: Styling and User Experience
-- CSS Styling: Apply CSS styles to make the interface visually appealing.
-- Responsiveness: Use CSS frameworks like Bootstrap to ensure the application is responsive on various devices.
-
-Step 11: Testing
-- Write Tests: Create PHPUnit or Laravel Dusk tests to ensure the functionality is working as expected.
-
-
-xxxxxxxxxxxxxxxxxxxxxxxxxxxx
 Database Setup:
-
 Create a new database and configure the database connection in the .env file.
-
 Design and implement the necessary database tables for the application. You need at least two tables, one for income records and one for expense records. Include relevant fields such as amount, description, date, and category.
 ---------------------------------------------------------------------------------------------------------------------------------------
 
@@ -178,7 +43,6 @@ For create_expenses_table.php: see the file
 
 - Run Migrations:
 -- php artisan migrate
-
 
 
 Models and Relationships:
@@ -299,14 +163,54 @@ Step 2: Use Blade Directives for Better Code Organization
 - In resources/views/incomes/index.blade.php:
 
 
+Filtering and Sorting:
+Allow users to filter income and expense records based on categories or date ranges.
+Provide options for sorting records by date or amount in ascending or descending order.
+-------------------------------------------------------------------------------------------------------------------------------
+
+Step 1: Filtering Records
+- In your controllers (IncomeController.php and ExpenseController.php), update the index methods to accept filters and date ranges as query parameters:
+- In your views (index.blade.php files), add a form to allow users to input category and date range filters:
+- Repeat the same steps for your expense records and controller.
+
+Step 2: Sorting Records
+- In your controllers, update the index methods to accept sorting options as query parameters:
+- In your views, add links or a form to allow users to choose sorting options:
+<div>
+    <a href="{{ route('incomes.index', ['sort_by' => 'date', 'sort_order' => 'asc']) }}">Sort by Date (Ascending)</a>
+    <a href="{{ route('incomes.index', ['sort_by' => 'date', 'sort_order' => 'desc']) }}">Sort by Date (Descending)</a>
+    <a href="{{ route('incomes.index', ['sort_by' => 'amount', 'sort_order' => 'asc']) }}">Sort by Amount (Ascending)</a>
+    <a href="{{ route('incomes.index', ['sort_by' => 'amount', 'sort_order' => 'desc']) }}">Sort by Amount (Descending)</a>
+</div>
+- Repeat the same steps for your expense records and controller.
 
 
 
+Data Manipulation:
+Implement the ability to edit and delete income and expense records.
+---------------------------------------------------------------------------------------------------------------------------------
+
+Step 1: Edit Record
+- In your controllers (IncomeController.php and ExpenseController.php), create methods to handle editing of income and expense records:
+- Create an edit view for income records (resources/views/incomes/edit.blade.php):
+- Update your routes to include the edit and update routes:
+
+Step 2: Delete Record
+- In your controllers, create a method to handle deletion of income and expense records:
+- Update your routes to include the delete route:
 
 
 
+Styling and User Experience:
+Apply CSS styling to ensure a user-friendly and visually appealing interface.
+Make the application responsive to different screen sizes.
+---------------------------------------------------------------------------------------------------------------------------------
 
+CSS Styling:
+- Create a custom.css file in your public/css directory to add your custom styles. Make sure to include this file in your layout (resources/views/layouts/app.blade.php):
+-- <link href="{{ asset('css/custom.css') }}" rel="stylesheet">
 
-
+Responsive Design:
+- To make your application responsive, you can use media queries to adjust your layout and styling based on different screen sizes.
 
 
